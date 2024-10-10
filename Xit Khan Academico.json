@@ -1,3 +1,42 @@
-{
-    "script": "let originalParse=JSON.parse;console.log(\"if you look in the console you WILL see a error, they save it as a question though so I'm not worried about it right now.\"),JSON.parse=function(t,e){let o=originalParse(t,e);try{const t=JSON.parse(o.data.assessmentItem.item.itemData);t.question&&t.question.content&&t.question.content[0]===t.question.content[0].toUpperCase()&&(console.log(t),t.question.content=\"Please select a answer choice.\\n [[%E2%98%83 radio 0]] [[%E2%98%83 explanation 0]]\",t.question.widgets={\"radio 0\":{options:{choices:[{content:\"Correto\",correct:!0},{content:\"Incorreto\",correct:!1}]}},\"explanation 0\":{options:{explanation:\"This hack was made by Ryan Gomes on GitHub.\",hidePrompt:\"\",showPrompt:\"Credit\"}}},o.data.assessmentItem.item.itemData=JSON.stringify(t))}catch(t){}return o},location.softReload=()=>{const t=document.getElementsByTagName(\"html\")[0].outerHTML;document.open(),document.write(t),document.close()},location.softReload();"
-}
+const newWindow = window.open(location.href, "targetWindow", "width=200,height=300,resizable=no");
+
+newWindow.onload = function() {
+    // Definindo o originalParse dentro do onload, após a janela ser carregada
+    let originalParse = newWindow.JSON.parse;
+
+    newWindow.JSON.parse = function(json, reviver) {
+        let parsed = originalParse(json, reviver);
+        try {
+            const itemData = JSON.parse(parsed.data.assessmentItem.item.itemData);
+            if (itemData.question.content.includes("[[")) {
+                itemData.question.content = "[[☃ radio 3]]";
+                itemData.question.widgets = {
+                    "radio 3": {
+                        alignment: "default",
+                        graded: true,
+                        options: {
+                            choices: [
+                                { content: "Correct answer", correct: true },
+                                { content: "Incorrect answer", correct: false }
+                            ],
+                            deselectEnabled: false
+                        },
+                        type: "radio"
+                    }
+                };
+                parsed.data.assessmentItem.item.itemData = JSON.stringify(itemData);
+            }
+        } catch (err) {
+            console.error("Failed to parse JSON", err);
+        }
+        return parsed;
+    };
+
+    // Função de recarregar a página na nova janela
+    newWindow.location.softReload = () => {
+        const pageContent = newWindow.document.getElementsByTagName("html")[0].outerHTML;
+        newWindow.document.open();
+        newWindow.document.write(pageContent);
+        newWindow.document.close();
+    };
+};

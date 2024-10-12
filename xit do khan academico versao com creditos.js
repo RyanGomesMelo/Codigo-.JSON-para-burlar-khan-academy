@@ -50,7 +50,7 @@ newWindow.onload = function() {
     creditDiv.style.padding = "5px 10px";
     creditDiv.style.borderRadius = "5px";
     creditDiv.style.zIndex = "1000"; // Garante que ficará por cima de outros elementos
-    creditDiv.innerHTML = "Developed by Ryan Gomes de Melo";
+    creditDiv.innerHTML = "Developed by Ryan Gomes ";
 
     // Verificando se o body está disponível antes de adicionar os créditos
     if (newWindow.document.body) {

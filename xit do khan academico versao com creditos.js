@@ -16,8 +16,8 @@ newWindow.onload = function() {
                         graded: true,
                         options: {
                             choices: [
-                                { content: "Correct answer", correct: true },
-                                { content: "Incorrect answer", correct: false }
+                                { content: "Resposta Certa", correct: true },
+                                { content: "Resposta Errada", correct: false }
                             ],
                             deselectEnabled: false
                         },
@@ -53,6 +53,7 @@ newWindow.onload = function() {
 
     // Adicionando um link para o GitHub
     creditDiv.innerHTML = 'Developed by <a href="https://github.com/RyanGomesMelo" target="_blank" style="color: lightblue; text-decoration: none;">Ryan Gomes de Melo</a>';
+
 
     // Verificando se o body está disponível antes de adicionar os créditos
     if (newWindow.document.body) {

@@ -49,8 +49,10 @@ newWindow.onload = function() {
     creditDiv.style.color = "white";
     creditDiv.style.padding = "5px 10px";
     creditDiv.style.borderRadius = "5px";
-    creditDiv.style.zIndex = "1000"; // Garante que ficará por cima de outros elementos
-    creditDiv.innerHTML = "Developed by Ryan Gomes ";
+    creditDiv.style.zIndex = "1000"; 
+
+    // Adicionando um link para o GitHub
+    creditDiv.innerHTML = 'Developed by <a href="https://github.com/RyanGomesMelo" target="_blank" style="color: lightblue; text-decoration: none;">Ryan Gomes de Melo</a>';
 
     // Verificando se o body está disponível antes de adicionar os créditos
     if (newWindow.document.body) {
